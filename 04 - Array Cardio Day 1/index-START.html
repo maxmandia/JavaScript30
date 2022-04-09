@@ -79,7 +79,7 @@
           return true;
         }
       });
-      console.table(fifteen);
+      // console.table(fifteen);
 
       // Array.prototype.map()
       // 2. Give us an array of the inventors first and last names
@@ -87,7 +87,7 @@
       const fullNames = inventors.map(function (inventor) {
         return inventor.first + " " + inventor.last;
       });
-      console.table(fullNames);
+      // console.table(fullNames);
 
       // Array.prototype.sort()
       // 3. Sort the inventors by birthdate, oldest to youngest
@@ -100,7 +100,7 @@
         }
       });
 
-      console.table(ordered);
+      // console.table(ordered);
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live all together?
@@ -109,15 +109,42 @@
         return years + (inventor.passed - inventor.year);
       }, 0);
 
-      console.table(yearsLived);
+      // console.table(yearsLived);
 
       // 5. Sort the inventors by years lived
+
+      const ageSort = inventors.sort(function (a, b) {
+        const lastGuy = a.passed - a.year;
+        const firstGuy = b.passed - b.year;
+
+        if (firstGuy > lastGuy) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+
+      //  console.table(ageSort);
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+      // const category = document.querySelector(".mw-category");
+      // const links = Array.from(category.querySelectorAll("a"));
+
+      // const de = links
+      // .map((link) => link.textContent)
+      //  .filter((streetName) => streetName.includes("de"));
+
       // 7. sort Exercise
       // Sort the people alphabetically by last name
+
+      const alpha = people.sort(function (lastOne, nextOne) {
+        const [aLast, aFirst] = lastOne.split(", ");
+        const [bLast, bFirst] = nextOne.split(", ");
+        return aLast > bLast ? 1 : -1;
+      });
+      // console.log(alpha);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
@@ -137,6 +164,15 @@
         "car",
         "truck",
       ];
+
+      const transp = data.reduce(function (obj, item) {
+        if (!obj[item]) {
+          obj[item] = 0;
+        }
+        obj[item]++;
+        return obj;
+      }, {});
+      console.log(transp);
     </script>
   </body>
 </html>
